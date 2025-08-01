@@ -30,7 +30,7 @@ export default function ProfilePage() {
     };
 
     fetchProfile();
-  }, []);
+  });
 
   const handleSave = async () => {
     const userId = localStorage.getItem("userId");

@@ -94,6 +94,8 @@ export default function ExpensePage() {
         setExpenses((prev) => [added, ...prev]);
       }
     } catch (err) {
+      console.error("Gagal menghapus data:", err);
+
       alert("Terjadi kesalahan saat menyimpan data.");
     }
 
@@ -131,6 +133,7 @@ export default function ExpensePage() {
       });
       setExpenses((prev) => prev.filter((ex) => ex.id !== id));
     } catch (err) {
+      console.error("Gagal menghapus data:", err);
       alert("Gagal menghapus data.");
     }
   };

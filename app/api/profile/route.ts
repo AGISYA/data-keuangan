@@ -31,7 +31,7 @@ export async function PUT(req: NextRequest) {
 
     const body = await req.json();
 
-    const updated = await prisma.user.update({
+    await prisma.user.update({
         where: { id: userId },
         data: {
             name: body.name,
@@ -41,6 +41,7 @@ export async function PUT(req: NextRequest) {
             company: body.company,
         },
     });
+
 
     return Response.json({ success: true });
 }

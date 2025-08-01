@@ -3,10 +3,15 @@ import { NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
+type RouteContext = {
+    params: Promise<{ id: string }>;
+};
+
 // PATCH (update)
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, context: RouteContext) {
     try {
-        const { id } = params;
+        const params = await context.params;
+        const id = params.id;
         const body = await req.json();
         const { store, items, price, receiptDate, inputDate, inputTime } = body;
 
@@ -33,9 +38,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 }
 
 // DELETE
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, context: RouteContext) {
     try {
-        const { id } = params;
+        const params = await context.params;
+        const id = params.id;
 
         await prisma.expense.delete({
             where: { id },
